@@ -76,4 +76,5 @@ python scripts/fetch_github_stars.py
 
 Deployment is a stock GitHub Actions workflow
 ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)): build with the
-`MISTRAL_API_KEY` repo secret, push `dist/` to Pages.
+`MISTRAL_API_KEY` repo secret, then `wrangler pages deploy dist` to Cloudflare
+Pages, served at [ai-boom.dashdown.ai](https://ai-boom.dashdown.ai/).
