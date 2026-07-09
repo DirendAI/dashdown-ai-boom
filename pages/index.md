@@ -11,10 +11,11 @@ icon: "📈"
 # Watching the AI boom in 150 billion PyPI downloads
 
 Every time someone runs `pip install`, PyPI writes it down. Add those lines up —
-month by month, package by package, from January 2019 to June 2026 — and you can
-watch the AI boom happen: the pre-history, the ChatGPT detonation in November
-2022, the framework war, and the strange economics of a world where most
-downloads aren't people at all.
+month by month, package by package, from January 2019 to June 2026 — and you get
+a seismograph of the AI boom. What it actually recorded — where the line bends,
+who leads the framework war, how much of it is even human — is not for me to
+tell you: on this page, the data speaks for itself, narrated by a model reading
+the same query results the charts draw.
 
 The paragraphs marked with a small ✦ below were **written by an LLM at build
 time**, from the same query results the charts draw. Nothing on this page talks
@@ -84,9 +85,10 @@ concrete numbers from the data. Do not use bullet points.
 
 ## 2 · The framework war
 
-LangChain was, for a moment, the fastest-adopted library in Python's history.
-Then the ecosystem had second thoughts — and the raw SDKs, plus a quiet little
-router called LiteLLM, kept climbing.
+The orchestration frameworks (LangChain, LangGraph, LlamaIndex) against the raw
+provider SDKs (OpenAI, Anthropic) — plus LiteLLM, the router that translates
+between them. Who rose, who plateaued, and who actually leads at the end is the
+model's call, below.
 
 ```sql framework_war
 SELECT p.month, c.label AS package, p.downloads
@@ -110,7 +112,7 @@ points, no headings.
 
 <LineChart data={framework_war} x="month" y="downloads" series="package"
            title="Frameworks vs raw SDKs — monthly downloads"
-           explain="Mark where LangChain's growth is overtaken, and where LiteLLM's late surge begins. How much of LiteLLM's lead was built in just the final quarter of the series?" />
+           explain="Mark any points where the lead changes hands in this series, and identify when the current leader's advantage was built. Is the leader's recent growth gradual or concentrated in the final months?" />
 
 ## 3 · The compute tell
 
@@ -143,12 +145,13 @@ someone else's GPUs rather than running their own. Use concrete numbers.
 ## 4 · Most of these downloads are robots
 
 Time for the honest part. A PyPI "download" is an HTTP request for a package
-file — from a human at a laptop, but far more often from a CI pipeline
-reinstalling the world on every commit, a Docker build, a lockfile resolver, or
-a cloud region warming its cache. The public stats can't cleanly separate them,
-and this dataset (monthly top-N snapshots — see [methodology](/methodology))
-carries no installer breakdown at all. So calibrate: here is the AI boom next
-to the packages that computers install because other computers told them to.
+file — it can come from a human at a laptop, a CI pipeline reinstalling the
+world on every commit, a Docker build, a lockfile resolver, or a cloud region
+warming its cache. The public stats can't cleanly separate them, and this
+dataset (monthly top-N snapshots — see [methodology](/methodology)) carries no
+installer breakdown at all. So instead of pretending otherwise, calibrate: the
+latest month's AI packages next to the workhorse baselines, and the model's
+read on what that comparison does to the word "download".
 
 ```sql scale_check
 SELECT c.label AS package,
@@ -163,27 +166,29 @@ ORDER BY p.downloads DESC
 ```
 
 <Ask data={scale_check} inline>
-Write one short, slightly wry paragraph. boto3's ~3.5 billion monthly downloads
-are overwhelmingly machines — CI pipelines, Docker builds, autoscaling fleets —
-not humans typing pip install. Use that as the calibration to interpret the AI
-packages in this data: what does it mean that litellm and openai now sit in
-the same order of magnitude as requests and numpy? Make the point that
-download counts measure how often software is *run by machines*, which is
-arguably the more honest measure of production adoption — while conceding we
-cannot know how many humans are behind them. Concrete numbers, no bullets.
+Write one short, slightly wry paragraph. Start from whichever baseline package
+tops this data: its monthly download count is overwhelmingly machines — CI
+pipelines, Docker builds, autoscaling fleets — not humans typing pip install.
+Use that as the calibration to interpret the AI packages here: where do they
+now sit relative to the workhorse baselines like requests and numpy, and what
+does that imply? Make the point that download counts measure how often
+software is *run by machines*, which is arguably the more honest measure of
+production adoption — while conceding we cannot know how many humans are
+behind them. Concrete numbers from the data, no bullets.
 </Ask>
 
 <BarChart data={scale_check} x="package" y="downloads" series="kind" horizontal
           title="Latest month: AI packages vs infrastructure baselines"
-          explain="boto3 is the AWS SDK — nobody hand-installs it 3.5 billion times a month; that volume is CI, Docker builds, and machines. Given that calibration, what do the AI packages' positions on this chart imply about how much of their volume is automated too?" />
+          explain="boto3 is the AWS SDK — nobody hand-installs it billions of times a month; that volume is CI, Docker builds, and machines. Given that calibration, what do the AI packages' positions on this chart imply about how much of their volume is automated too?" />
 
 ## 5 · Hype vs. usage
 
-GitHub stars are applause; `pip install` is attendance. Some projects fill both
-halls. Others — llama.cpp, Ollama, AutoGPT — are among the most-starred
-repositories on Earth while their Python packages barely register next to the
-boring workhorses. (Star history here covers each repo only while it sits in a
-GitHub top-100 list; that's exactly the population hype is about.)
+GitHub stars are applause; `pip install` is attendance. Below: the star curves
+of the era's most-hyped repositories, then each repo's stars paired with what
+its Python package actually does on PyPI in the latest month. Whether applause
+and attendance agree — and where they diverge most — is the model's verdict.
+(Star history covers each repo only while it sits in a GitHub top-100 list;
+that's exactly the population hype is about.)
 
 ```sql stars
 SELECT month, repo, cumulative_stars
@@ -222,12 +227,11 @@ ORDER BY installs_per_star DESC
 <Ask data={hype_gap,stars} inline>
 This data pairs each repo's GitHub stars with its Python package's monthly
 PyPI downloads (latest month), plus installs-per-star. Write one short
-paragraph on the gap: llama.cpp and Ollama are two of the most-starred projects
-in the world, yet their Python bindings are dwarfed by langchain and
-transformers installs. Offer the honest explanations — people run Ollama and
-llama.cpp as apps or binaries, not via pip, so PyPI under-counts them; and
-stars measure enthusiasm while installs measure automation. Note which project
-has the most extreme stars-to-installs imbalance, with numbers.
+paragraph answering: are the most-starred projects also the most-installed?
+Name the projects at the two extremes of installs-per-star, with numbers. Then
+offer the honest explanations for the gap — some projects are used as apps or
+binaries rather than via pip, so PyPI under-counts them; and stars measure
+enthusiasm while installs measure automation.
 </Ask>
 
 <Table data={hype_gap} title="Stars vs installs, latest month"
