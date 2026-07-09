@@ -16,7 +16,7 @@ databases, the training and serving infrastructure — plus four boring baseline
 for scale, and pulled their monthly download counts from January 2019 to June
 2026. Then I did the part I actually want to tell you about: I let the dashboard
 write its own analysis. Every chart on the
-[live site](https://direndai.github.io/dashdown-ai-boom/) is followed by prose an
+[live site](https://ai-boom.dashdown.ai/) is followed by prose an
 LLM generated *at build time* from the same query results the chart draws — baked
 into static JSON, no server, no chat box, no per-view API bill.
 
@@ -115,7 +115,7 @@ renders it: the SQL runs on an embedded DuckDB over ~20 KB of committed Parquet,
 the chart is ECharts, and `<Ask>` sends the query result to an LLM and renders
 the answer as body prose. The trick is *when*: `dashdown build` executes every
 query and every Ask **once**, freezes the answers into JSON next to the chart
-snapshots, and emits plain static files. GitHub Pages serves them. The reader
+snapshots, and emits plain static files. Cloudflare Pages serves them. The reader
 never triggers an LLM call, can't prompt-inject anything (there's no prompt
 box), and the total AI bill for the site you're reading was a few cents of
 Mistral tokens at build time. Charts additionally carry an `explain` layer that
@@ -130,4 +130,4 @@ including the top-N censoring and every other caveat — is on the site.
 
 The whole thing is a ~250-line Markdown file →
 **[github.com/DirendAI/dashdown-ai-boom](https://github.com/DirendAI/dashdown-ai-boom)**,
-live at **[direndai.github.io/dashdown-ai-boom](https://direndai.github.io/dashdown-ai-boom/)**.
+live at **[ai-boom.dashdown.ai](https://ai-boom.dashdown.ai/)**.

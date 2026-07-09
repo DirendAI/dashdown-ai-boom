@@ -1,4 +1,4 @@
-name: Build & deploy to GitHub Pages
+name: Build & deploy to Cloudflare Pages
 
 on:
   push:
@@ -7,19 +7,14 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -35,32 +30,17 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         run: dashdown build . --out dist
 
-      - name: Warn if AI answers were not baked
+      - name: Fail if AI answers were not baked
         run: |
           if grep -rl '"notice"' dist/_dashdown/data/_ask/ >/dev/null 2>&1; then
-            echo "::warning::Some Ask answers are notice payloads — is the MISTRAL_API_KEY secret set?"
+            echo "::error::Some Ask answers are notice payloads — is the MISTRAL_API_KEY secret set?"
+            exit 1
           fi
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      # Optional second target: Cloudflare Pages (ai-boom.dashdown.ai).
-      # Runs only when CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID secrets exist.
-      - name: Deploy to Cloudflare Pages
-        if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
+      - name: Deploy to Cloudflare Pages (ai-boom.dashdown.ai)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          npx --yes wrangler@3 pages project create ai-boom-dashdown \
-            --production-branch=main 2>/dev/null || true
           npx --yes wrangler@3 pages deploy dist \
             --project-name=ai-boom-dashdown --branch=main
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

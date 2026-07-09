@@ -3,7 +3,7 @@
 **A dashboard that writes its own analysis — baked to static files, no backend, no
 per-view LLM cost.**
 
-**Live site:** https://direndai.github.io/dashdown-ai-boom/
+**Live site:** https://ai-boom.dashdown.ai/
 
 ![The dashboard](assets/screenshot.png)
 
@@ -47,7 +47,7 @@ the narration is the interesting bit:
 ```
 pages/index.md      ← the whole article: prose + SQL + <Ask>/<LineChart> tags
 data/*.parquet      ← ~20 KB of pre-aggregated real data (see below)
-dashdown build      → dist/ = plain static files → GitHub Pages
+dashdown build      → dist/ = plain static files → Cloudflare Pages
 ```
 
 ## The data is real
@@ -61,7 +61,7 @@ dashdown build      → dist/ = plain static files → GitHub Pages
 
 `scripts/` contains the reproducible fetchers plus the canonical full-resolution
 ClickHouse queries. The caveats (bots, mirrors, top-N censoring) are documented on
-the [methodology page](https://direndai.github.io/dashdown-ai-boom/methodology/) —
+the [methodology page](https://ai-boom.dashdown.ai/methodology/) —
 and narrated, honestly, in section 4 of the dashboard itself.
 
 ## Run it yourself
