@@ -7,11 +7,11 @@ llm:
   api_key: ${MISTRAL_API_KEY}   # build-time only — answers are baked into the static export
 
 layout:
-  width: m          # article measure — this is a long-scroll story, not a grid of tiles
-  header: false     # no top app header either — pure article; theme follows the OS
-
-sidebar:
-  hidden: true      # article-style site — the two pages cross-link in the prose instead
+  width: m              # article measure — this is a long-scroll story, not a grid of tiles
+  header: false         # no top app header — pure article chrome; theme defaults to the OS
+  theme_toggle: true    # …but keep the floating light/dark button so readers can override (0.1.14 feature)
+  sidebar:
+    hidden: true        # article-style site — the two pages cross-link in the prose instead
 
 branding:
   palette: ["#6366f1", "#f59e0b", "#10b981", "#ef4444", "#0ea5e9", "#a855f7", "#f97316", "#14b8a6"]
