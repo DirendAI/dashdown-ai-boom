@@ -8,6 +8,7 @@ llm:
 
 layout:
   width: m          # article measure — this is a long-scroll story, not a grid of tiles
+  header: false     # no top app header either — pure article; theme follows the OS
 
 sidebar:
   hidden: true      # article-style site — the two pages cross-link in the prose instead
