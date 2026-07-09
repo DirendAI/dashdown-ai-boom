@@ -1,0 +1,47 @@
+package,repo,category,label
+openai,openai/openai-python,llm_sdk,OpenAI SDK
+anthropic,anthropics/anthropic-sdk-python,llm_sdk,Anthropic SDK
+cohere,cohere-ai/cohere-python,llm_sdk,Cohere SDK
+mistralai,mistralai/client-python,llm_sdk,Mistral SDK
+google-generativeai,google-gemini/deprecated-generative-ai-python,llm_sdk,Google Generative AI
+google-genai,googleapis/python-genai,llm_sdk,Google GenAI SDK
+groq,groq/groq-python,llm_sdk,Groq SDK
+together,togethercomputer/together-python,llm_sdk,Together SDK
+ollama,ollama/ollama-python,llm_sdk,Ollama (Python client)
+langchain,langchain-ai/langchain,framework,LangChain
+langchain-core,langchain-ai/langchain,framework,LangChain Core
+langgraph,langchain-ai/langgraph,framework,LangGraph
+llama-index,run-llama/llama_index,framework,LlamaIndex
+haystack-ai,deepset-ai/haystack,framework,Haystack
+dspy-ai,stanfordnlp/dspy,framework,DSPy
+crewai,crewAIInc/crewAI,framework,CrewAI
+pyautogen,microsoft/autogen,framework,AutoGen
+semantic-kernel,microsoft/semantic-kernel,framework,Semantic Kernel
+litellm,BerriAI/litellm,framework,LiteLLM
+instructor,567-labs/instructor,framework,Instructor
+langsmith,langchain-ai/langsmith-sdk,framework,LangSmith
+pydantic-ai,pydantic/pydantic-ai,framework,Pydantic AI
+openai-agents,openai/openai-agents-python,framework,OpenAI Agents
+chromadb,chroma-core/chroma,vector_rag,ChromaDB
+pinecone-client,pinecone-io/pinecone-python-client,vector_rag,Pinecone
+pinecone,pinecone-io/pinecone-python-client,vector_rag,Pinecone (new pkg)
+qdrant-client,qdrant/qdrant-client,vector_rag,Qdrant
+weaviate-client,weaviate/weaviate-python-client,vector_rag,Weaviate
+faiss-cpu,facebookresearch/faiss,vector_rag,FAISS
+lancedb,lancedb/lancedb,vector_rag,LanceDB
+torch,pytorch/pytorch,infra,PyTorch
+transformers,huggingface/transformers,infra,Transformers
+accelerate,huggingface/accelerate,infra,Accelerate
+vllm,vllm-project/vllm,infra,vLLM
+peft,huggingface/peft,infra,PEFT
+datasets,huggingface/datasets,infra,Datasets
+sentence-transformers,UKPLab/sentence-transformers,infra,Sentence Transformers
+tokenizers,huggingface/tokenizers,infra,Tokenizers
+tiktoken,openai/tiktoken,infra,tiktoken
+safetensors,huggingface/safetensors,infra,Safetensors
+huggingface-hub,huggingface/huggingface_hub,infra,HF Hub
+llama-cpp-python,abetlen/llama-cpp-python,infra,llama-cpp-python
+requests,psf/requests,baseline,Requests
+boto3,boto/boto3,baseline,Boto3
+numpy,numpy/numpy,baseline,NumPy
+pandas,pandas-dev/pandas,baseline,Pandas

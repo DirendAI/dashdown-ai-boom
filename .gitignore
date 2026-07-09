@@ -1,0 +1,10 @@
+# Dashdown build artifacts
+.dist/
+.pdf/
+.shots/
+
+# Static build output
+dist/
+
+# Python
+__pycache__/

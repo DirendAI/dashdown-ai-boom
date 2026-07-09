@@ -1,0 +1,3 @@
+ai_boom:
+  type: parquet
+  directory: data   # pypi_downloads / github_stars / cohort — see scripts/ for provenance
