@@ -41,7 +41,7 @@ WHERE c.category <> 'baseline'
 ```
 
 <Grid cols=3>
-<Counter data={kpis} column="total_downloads" format="compact" label="Cohort downloads since 2019" />
+<Counter data={kpis} column="total_downloads" format="compact" label="Downloads replayed since 2019 (46 pkgs)" />
 <Counter data={kpis} column="ai_downloads" format="compact" label="…of which AI packages" />
 <Counter data={kpi_latest} column="ai_monthly" format="compact" label="AI installs, latest month" />
 </Grid>
@@ -109,7 +109,8 @@ points, no headings.
 </Ask>
 
 <LineChart data={framework_war} x="month" y="downloads" series="package"
-           title="Frameworks vs raw SDKs — monthly downloads" />
+           title="Frameworks vs raw SDKs — monthly downloads"
+           explain="Mark where LangChain's growth is overtaken, and where LiteLLM's late surge begins. How much of LiteLLM's lead was built in just the final quarter of the series?" />
 
 ## 3 · The compute tell
 

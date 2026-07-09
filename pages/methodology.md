@@ -49,7 +49,8 @@ installer breakdown this page had to do without).
 3. **Snapshot timing.** Each monthly figure is a trailing-30-day window
    captured near the start of the following month, labeled with the month it
    mostly covers. A few months in 2019–2020 have no snapshot and are simply
-   absent.
+   absent — which also means cumulative totals (like the headline counter) sum
+   only the sampled months. Read them as floors, not exact censuses.
 4. **Star coverage.** Star history covers a repo only while it sits in a
    GitHub top-100 list (overall or per-language). That's exactly the
    population "hype" is about, but it means series begin when a repo becomes

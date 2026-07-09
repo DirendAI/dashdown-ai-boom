@@ -17,7 +17,8 @@ databases, training/serving infra — and you can watch the AI boom happen:
   36M the month before ChatGPT ships, and ends at **4 billion installs a month**.
 - **The framework war.** LangChain's near-vertical 2023 rise — and the punchline
   that **LiteLLM**, a router most people couldn't name, ends the series ahead of
-  both LangChain *and* the OpenAI SDK at 633M installs/month.
+  both LangChain *and* the OpenAI SDK at 633M installs/month (a lead built almost
+  entirely in the final quarter of the data — the bots caveat in section 4 applies).
 - **The compute tell.** API-client installs vs. torch/vllm installs: the API
   economy, measured in downloads.
 - **Most of these downloads are robots.** boto3 does 3.5B downloads/month; nobody

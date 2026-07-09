@@ -93,6 +93,15 @@ def main():
     con.execute(f"COPY (SELECT * FROM t ORDER BY month, package) TO '{out}' (FORMAT PARQUET)")
     print(f"Wrote {out} ({len(rows)} rows, {len(per_month)} months)")
 
+    # cohort.csv is the hand-edited source of truth; mirror it to parquet so
+    # the single parquet connector sees it. Regenerate whenever the csv changes.
+    cohort_out = ROOT / "data" / "cohort.parquet"
+    con.execute(
+        f"COPY (SELECT * FROM read_csv('{ROOT / 'data' / 'cohort.csv'}')) "
+        f"TO '{cohort_out}' (FORMAT PARQUET)"
+    )
+    print(f"Wrote {cohort_out}")
+
 
 if __name__ == "__main__":
     main()
