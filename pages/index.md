@@ -70,10 +70,6 @@ GROUP BY 1, 2
 ORDER BY 1, 2
 ```
 
-<LineChart data={seismograph} x="month" y="downloads" series="segment" stacked
-           title="Monthly PyPI downloads — AI package cohort, stacked by category"
-           explain="Where is the inflection point in this time series, and how does the growth rate before it compare to after it? ChatGPT launched on 2022-11-30 — is that visible in the data?" />
-
 <Ask data={seismograph} inline>
 Narrate the overall shape of this time series in one short paragraph for a
 technical reader: the near-flat years before late 2022, what happens after
@@ -81,6 +77,10 @@ ChatGPT's launch (November 30, 2022), and roughly how many times larger the
 monthly download volume is at the end of the series than in October 2022. Use
 concrete numbers from the data. Do not use bullet points.
 </Ask>
+
+<LineChart data={seismograph} x="month" y="downloads" series="segment" stacked
+           title="Monthly PyPI downloads — AI package cohort, stacked by category"
+           explain="Where is the inflection point in this time series, and how does the growth rate before it compare to after it? ChatGPT launched on 2022-11-30 — is that visible in the data?" />
 
 ## 2 · The framework war
 
@@ -96,11 +96,8 @@ WHERE p.package IN ('langchain', 'langgraph', 'llama-index', 'openai', 'anthropi
 ORDER BY p.month, package
 ```
 
-<LineChart data={framework_war} x="month" y="downloads" series="package"
-           title="Frameworks vs raw SDKs — monthly downloads" />
-
 <Ask data={framework_war} inline>
-This chart compares LLM orchestration frameworks (LangChain, LangGraph,
+This data compares LLM orchestration frameworks (LangChain, LangGraph,
 LlamaIndex) against raw provider SDKs (OpenAI, Anthropic) and the LiteLLM
 router, monthly since 2019. Write two short paragraphs for a Hacker News
 audience: first, the LangChain story — its explosive 2023 rise, and how its
@@ -110,6 +107,9 @@ most monthly downloads, and what its lead over the famous names suggests about
 how production LLM apps are actually built. Cite concrete numbers. No bullet
 points, no headings.
 </Ask>
+
+<LineChart data={framework_war} x="month" y="downloads" series="package"
+           title="Frameworks vs raw SDKs — monthly downloads" />
 
 ## 3 · The compute tell
 
@@ -125,10 +125,6 @@ WHERE p.package IN ('torch', 'transformers', 'vllm', 'accelerate', 'peft')
 ORDER BY p.month, package
 ```
 
-<LineChart data={compute_tell} x="month" y="downloads" series="package"
-           title="Training & serving infrastructure — monthly downloads"
-           explain="Compare the trajectories of the training/fine-tuning stack (accelerate, peft) with the serving stack (vllm) and the base libraries (torch, transformers). What does the relative growth since 2023 suggest about what the ecosystem is doing with models?" />
-
 <Ask data={compute_tell,framework_war} inline>
 Comparing these two datasets — GPU-era infrastructure packages (torch,
 transformers, vllm, accelerate, peft) versus API-calling packages (openai,
@@ -138,6 +134,10 @@ happen for every install of serving infrastructure by the end of the series,
 and whether the data supports the claim that most of the boom is people calling
 someone else's GPUs rather than running their own. Use concrete numbers.
 </Ask>
+
+<LineChart data={compute_tell} x="month" y="downloads" series="package"
+           title="Training & serving infrastructure — monthly downloads"
+           explain="Compare the trajectories of the training/fine-tuning stack (accelerate, peft) with the serving stack (vllm) and the base libraries (torch, transformers). What does the relative growth since 2023 suggest about what the ecosystem is doing with models?" />
 
 ## 4 · Most of these downloads are robots
 
@@ -161,20 +161,20 @@ WHERE p.month = (SELECT MAX(month) FROM pypi_downloads)
 ORDER BY p.downloads DESC
 ```
 
-<BarChart data={scale_check} x="package" y="downloads" series="kind" horizontal
-          title="Latest month: AI packages vs infrastructure baselines"
-          explain="boto3 is the AWS SDK — nobody hand-installs it 3.5 billion times a month; that volume is CI, Docker builds, and machines. Given that calibration, what do the AI packages' positions on this chart imply about how much of their volume is automated too?" />
-
 <Ask data={scale_check} inline>
 Write one short, slightly wry paragraph. boto3's ~3.5 billion monthly downloads
 are overwhelmingly machines — CI pipelines, Docker builds, autoscaling fleets —
 not humans typing pip install. Use that as the calibration to interpret the AI
-packages on this chart: what does it mean that litellm and openai now sit in
+packages in this data: what does it mean that litellm and openai now sit in
 the same order of magnitude as requests and numpy? Make the point that
 download counts measure how often software is *run by machines*, which is
 arguably the more honest measure of production adoption — while conceding we
 cannot know how many humans are behind them. Concrete numbers, no bullets.
 </Ask>
+
+<BarChart data={scale_check} x="package" y="downloads" series="kind" horizontal
+          title="Latest month: AI packages vs infrastructure baselines"
+          explain="boto3 is the AWS SDK — nobody hand-installs it 3.5 billion times a month; that volume is CI, Docker builds, and machines. Given that calibration, what do the AI packages' positions on this chart imply about how much of their volume is automated too?" />
 
 ## 5 · Hype vs. usage
 
@@ -218,11 +218,8 @@ WHERE g.rn = 1
 ORDER BY installs_per_star DESC
 ```
 
-<Table data={hype_gap} title="Stars vs installs, latest month"
-       format="stars=number, monthly_installs=number, installs_per_star=number" decimals=0 />
-
 <Ask data={hype_gap,stars} inline>
-This table pairs each repo's GitHub stars with its Python package's monthly
+This data pairs each repo's GitHub stars with its Python package's monthly
 PyPI downloads (latest month), plus installs-per-star. Write one short
 paragraph on the gap: llama.cpp and Ollama are two of the most-starred projects
 in the world, yet their Python bindings are dwarfed by langchain and
@@ -231,6 +228,9 @@ llama.cpp as apps or binaries, not via pip, so PyPI under-counts them; and
 stars measure enthusiasm while installs measure automation. Note which project
 has the most extreme stars-to-installs imbalance, with numbers.
 </Ask>
+
+<Table data={hype_gap} title="Stars vs installs, latest month"
+       format="stars=number, monthly_installs=number, installs_per_star=number" decimals=0 />
 
 ## 6 · The AI's read on the data
 
