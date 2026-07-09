@@ -5,6 +5,8 @@ icon: "🔬"
 width: s
 ---
 
+[← Back to the dashboard](/)
+
 # Methodology & honest caveats
 
 ## Sources
@@ -82,3 +84,5 @@ python scripts/fetch_github_stars.py       # rebuild data/github_stars.parquet
 dashdown serve .                           # live dev server
 MISTRAL_API_KEY=… dashdown build . --out dist   # static site, answers baked
 ```
+
+[← Back to the dashboard](/)
